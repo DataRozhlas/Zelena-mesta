@@ -1,6 +1,7 @@
 .ipynb_checkpoints
 data/urbanareas_cz
 data/urban_atlas.gdb
+data/zelen.geojson
 *.lock
 .~lock.*
 .Rproj.user
