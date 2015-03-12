@@ -1,0 +1,4 @@
+.ipynb_checkpoints
+data/urbanareas_cz
+data/urban_atlas.gdb
+*.lock
