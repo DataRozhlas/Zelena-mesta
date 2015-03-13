@@ -17,13 +17,19 @@ container = d3.select ig.containers.base
 container.append \svg
   ..attr \width width
   ..attr \height height
+  ..append \defs
+    ..append \clipPath
+      ..attr \id \mesto
+      ..append \path
+        ..attr \d path prg.0
   ..append \g
-    ..attr \transform "scale(#{tiles.scale}) translate(#{tiles.translate})"
-    ..selectAll \image .data tiles .enter!append \image
-      ..attr \xlink:href -> "https://samizdat.cz/tiles/ton_b1/#{it.2}/#{it.0}/#{it.1}.png"
-      ..attr \width 1
-      ..attr \height 1
-      ..attr \x -> it.0
-      ..attr \y -> it.1
-  ..append \path
-    ..attr \d path prg.0
+    ..attr \class \map-tiles
+    ..attr \clip-path 'url(#mesto)'
+    ..append \g
+      ..attr \transform "scale(#{tiles.scale}) translate(#{tiles.translate})"
+      ..selectAll \image .data tiles .enter!append \image
+        ..attr \xlink:href -> "https://samizdat.cz/tiles/ton_b1/#{it.2}/#{it.0}/#{it.1}.png"
+        ..attr \width 1
+        ..attr \height 1
+        ..attr \x -> it.0
+        ..attr \y -> it.1
