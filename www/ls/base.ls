@@ -17,14 +17,20 @@ container = d3.select ig.containers.base
 container.append \svg
   ..attr \width width
   ..attr \height height
-  ..append \defs
-    ..append \clipPath
-      ..attr \id \mesto
-      ..append \path
-        ..attr \d path prg.0
+  ..append \mask
+    ..attr \id \mesto
+    ..append \rect
+      ..attr \x 0
+      ..attr \y 0
+      ..attr \width width
+      ..attr \height height
+      ..attr \fill '#101010'
+    ..append \path
+      ..attr \fill '#fff'
+      ..attr \d path prg.0
   ..append \g
     ..attr \class \map-tiles
-    ..attr \clip-path 'url(#mesto)'
+    ..attr \mask 'url(#mesto)'
     ..append \g
       ..attr \transform "scale(#{tiles.scale}) translate(#{tiles.translate})"
       ..selectAll \image .data tiles .enter!append \image
