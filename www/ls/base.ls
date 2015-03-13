@@ -1,6 +1,11 @@
 mesta = topojson.feature ig.data['krajska-mesta'], ig.data['krajska-mesta'].objects.data
 
-prg = mesta.features.filter -> it.properties.NAZOB == "Praha"
+cities = ["Olomouc" "České Budějovice" "Praha" "Plzeň" "Ústí nad Labem" "Ostrava" "Karlovy Vary" "Pardubice" "Liberec" "Hradec Králové" "Brno" "Zlín" "Jihlava"]
+citiesNoDiacritics = ["Olomouc" "Ceske Budejovice" "Praha" "Plzen" "Usti nad Labem" "Ostrava" "Karlovy Vary" "Pardubice" "Liberec" "Hradec Kralove" "Brno" "Zlin" "Jihlava"]
+cityToDraw = 12 %% cities.length
+console.log cities[cityToDraw]
+
+prg = mesta.features.filter -> it.properties.NAZOB == cities[cityToDraw]
 w = 230
 padding = 10
 {width, height, projection} = ig.utils.geo.getFittingProjection prg, w - 2 * padding
@@ -49,7 +54,7 @@ svg = container.append \svg
         ..attr \y -> it.1
 
 zelen = topojson.feature ig.data.zelen, ig.data.zelen.objects.data
-zelenPrg = zelen.features.filter -> it.properties.CITIES == "Praha"
+zelenPrg = zelen.features.filter -> it.properties.CITIES == citiesNoDiacritics[cityToDraw]
 
 svg.append \g .attr \class \zelen
   .selectAll \path .data zelenPrg .enter!append \path
