@@ -2,6 +2,7 @@
 data/urbanareas_cz
 data/urban_atlas.gdb
 data/zelen.geojson
+data/krajska-mesta.geojson
 *.lock
 .~lock.*
 .Rproj.user

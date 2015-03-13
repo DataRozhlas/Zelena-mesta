@@ -2,17 +2,19 @@ require! fs
 require! async
 
 externalScripts =
-  \https://samizdat.cz/tools/tooltip/v1.1.4.d3.js
+  # \https://samizdat.cz/tools/tooltip/v1.1.4.d3.js
+  \https://raw.githubusercontent.com/d3/d3-plugins/master/geo/tile/tile.js
   ...
 
 externalStyles =
-  \https://samizdat.cz/tools/tooltip/v1.1.4.css
+  # \https://samizdat.cz/tools/tooltip/v1.1.4.css
   ...
 
-externalData = {}
-  # "leky": "#__dirname/data/leky.tsv"
+externalData =
+  "zelen": "#__dirname/data/zelen.topo.json"
+  "krajska-mesta": "#__dirname/data/krajska-mesta.topo.json"
 
-preferScripts = <[ postInit.js _loadData.js ../data.js init.js _loadExternal.js]>
+preferScripts = <[utils.js postInit.js _loadData.js ../data.js init.js _loadExternal.js]>
 deferScripts = <[ Graph.js base.js ]>
 develOnlyScripts = <[ _loadData.js _loadExternal.js]>
 gzippable = <[ www/index.deploy.html www/script.deploy.js ]>
@@ -127,6 +129,12 @@ combine-scripts = (options = {}, cb) ->
   {map, code} = result
   if not options.compression
     code += "\n//@ sourceMappingURL=./js/script.js.map"
+    patt = __dirname.replace /\\/g '\\\\\\\\'
+    map .= replace do
+      new RegExp do
+        patt
+        'g'
+      ''
     fs.writeFile "#__dirname/www/js/script.js.map", map
   else
     external = fs.readFileSync "#__dirname/www/external.js"
