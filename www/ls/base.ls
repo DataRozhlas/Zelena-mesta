@@ -2,7 +2,9 @@ mesta = topojson.feature ig.data['krajska-mesta'], ig.data['krajska-mesta'].obje
 
 cities = ["Olomouc" "České Budějovice" "Praha" "Plzeň" "Ústí nad Labem" "Ostrava" "Karlovy Vary" "Pardubice" "Liberec" "Hradec Králové" "Brno" "Zlín" "Jihlava"]
 citiesNoDiacritics = ["Olomouc" "Ceske Budejovice" "Praha" "Plzen" "Usti nad Labem" "Ostrava" "Karlovy Vary" "Pardubice" "Liberec" "Hradec Kralove" "Brno" "Zlin" "Jihlava"]
-cityToDraw = 12 %% cities.length
+cityToDraw = 13 %% cities.length
+
+document.title = citiesNoDiacritics[cityToDraw]
 console.log cities[cityToDraw]
 
 prg = mesta.features.filter -> it.properties.NAZOB == cities[cityToDraw]
