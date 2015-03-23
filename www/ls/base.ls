@@ -2,14 +2,14 @@ mesta = topojson.feature ig.data['krajska-mesta'], ig.data['krajska-mesta'].obje
 
 cities = ["Olomouc" "České Budějovice" "Praha" "Plzeň" "Ústí nad Labem" "Ostrava" "Karlovy Vary" "Pardubice" "Liberec" "Hradec Králové" "Brno" "Zlín" "Jihlava"]
 citiesNoDiacritics = ["Olomouc" "Ceske Budejovice" "Praha" "Plzen" "Usti nad Labem" "Ostrava" "Karlovy Vary" "Pardubice" "Liberec" "Hradec Kralove" "Brno" "Zlin" "Jihlava"]
-cityToDraw = 13 %% cities.length
+cityToDraw = 0 %% cities.length
 
 document.title = citiesNoDiacritics[cityToDraw]
 console.log cities[cityToDraw]
 
 prg = mesta.features.filter -> it.properties.NAZOB == cities[cityToDraw]
-w = 230
-padding = 10
+w = 400
+padding = 0
 {width, height, projection} = ig.utils.geo.getFittingProjection prg, w - 2 * padding
 projection.translate [padding, padding]
 fullWidth = width + 2 * padding
@@ -36,7 +36,7 @@ svg = container.append \svg
       ..attr \y 0
       ..attr \width fullWidth
       ..attr \height fullHeight
-      ..attr \fill '#060606'
+      ..attr \fill '#000'
     ..append \path
       ..attr \fill '#888'
       ..attr \d path prg.0
